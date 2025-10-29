@@ -18,18 +18,21 @@ class MainActivity : AppCompatActivity() {
         val username = findViewById<EditText>(R.id.editTextusername)
         val password = findViewById<EditText>(R.id.editTextpassword)
 
-        var usernameText = username.text.toString()
-        var passwordText = password.text.toString()
 
         var buttonSubmit = findViewById<Button>(R.id.buttonSubmit)
 
         buttonSubmit.setOnClickListener{
+
+            var usernameText = username.text.toString()
+            var passwordText = password.text.toString()
+
             if (usernameText.isBlank()|| passwordText.isBlank()){
+
             Toast.makeText(this,"Username & Password tidak boleh kosong",
                 Toast.LENGTH_LONG).show()
 
         }else{
-            Toast.makeText(this,"Loging diproses..",
+            Toast.makeText(this,"Loging sedang diproses",
                 Toast.LENGTH_LONG).show()
 
         }
