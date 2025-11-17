@@ -1,5 +1,6 @@
 package com.example.aplikasipertama
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -37,8 +38,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-
+        }
+        val buttonDaftar = findViewById<Button>(R.id.buttonDaftar)
+        buttonDaftar.setOnClickListener {
+            val intenPindahPendaftaran = Intent(this,PendaftaranActivity::class.java)
+            startActivity(intenPindahPendaftaran)
+            finish()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
