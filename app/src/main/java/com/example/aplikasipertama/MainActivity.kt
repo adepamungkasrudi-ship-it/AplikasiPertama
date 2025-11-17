@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
         }
         val buttonDaftar = findViewById<Button>(R.id.buttonDaftar)
         buttonDaftar.setOnClickListener {

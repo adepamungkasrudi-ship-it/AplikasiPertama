@@ -12,6 +12,7 @@ class PendaftaranActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContentView(R.layout.activity_pendaftaran)
         val buttonCancel = findViewById<Button>(R.id.btnCancel)
         buttonCancel.setOnClickListener {
