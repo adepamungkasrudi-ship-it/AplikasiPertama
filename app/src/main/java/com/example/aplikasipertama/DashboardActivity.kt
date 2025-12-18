@@ -13,6 +13,7 @@ import kotlinx.coroutines.withContext
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var userDao: UserDao
+    public var id: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,7 +27,7 @@ class DashboardActivity : AppCompatActivity() {
         val db = AbsensiDatabase.getDatabase(this)
         userDao = db.userDao()
 
-        val id = intent.getIntExtra("ID", 0)
+        id = intent.getIntExtra("ID", 0)
 
         val tvUsername = findViewById<TextView>(R.id.tvUsername)
         val tvEmail = findViewById<TextView>(R.id.tvEmail)

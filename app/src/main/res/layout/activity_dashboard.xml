@@ -103,13 +103,6 @@
                 android:layout_height="300sp"
                 android:layout_marginTop="20sp" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:backgroundTint="#E91E63"
-                android:text="ABSEN" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

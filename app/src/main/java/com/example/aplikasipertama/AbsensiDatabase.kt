@@ -7,12 +7,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [UserEntity::class],
-    version = 2
+    entities = [UserEntity::class,
+               AttendanceEntity::class],
+    version = 2,
+    exportSchema= false
 )
 abstract class AbsensiDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
+    abstract fun attendanceDao(): AttendanceDao
 
     companion object {
         @Volatile
@@ -25,7 +28,7 @@ abstract class AbsensiDatabase : RoomDatabase() {
                     AbsensiDatabase::class.java,
                     "aplikasiabsensi"
                 )
-                    .fallbackToDestructiveMigration()
+                    .addMigrations(MIGRATION_1_2)
                     .build()
 
                 INSTANCE = instance
