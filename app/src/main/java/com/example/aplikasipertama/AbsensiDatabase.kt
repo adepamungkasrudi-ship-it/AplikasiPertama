@@ -7,28 +7,29 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [
-        UserEntity::class
-    ], version = 1
+    entities = [UserEntity::class],
+    version = 2
 )
-abstract class AbsensiDatabase: RoomDatabase() {
+abstract class AbsensiDatabase : RoomDatabase() {
+
     abstract fun userDao(): UserDao
 
+    companion object {
+        @Volatile
+        private var INSTANCE: AbsensiDatabase? = null
 
-
-    companion object{
-        private  var INSTANCE: AbsensiDatabase? = null
-
-        fun getDatabase(context: Context): AbsensiDatabase{
-            return INSTANCE?: synchronized(this){
+        fun getDatabase(context: Context): AbsensiDatabase {
+            return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AbsensiDatabase::class.java,
                     "aplikasiabsensi"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
+
                 INSTANCE = instance
                 instance
-
             }
         }
     }

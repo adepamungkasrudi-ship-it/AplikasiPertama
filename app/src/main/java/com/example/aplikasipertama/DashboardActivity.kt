@@ -1,9 +1,7 @@
 package com.example.aplikasipertama
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,44 +12,36 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DashboardActivity : AppCompatActivity() {
-
     private lateinit var userDao: UserDao
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_dashboard)
 
-        // Ambil ID dari intent
-        val id = intent.getIntExtra("ID", 0)
+        val username = intent.getStringExtra("USERNAME")
+        val email = intent.getStringExtra("EMAIL")
+        val nama_depan = intent.getStringExtra("NAMA DEPAN")
+        val nama_belakang = intent.getStringExtra("NAMA BELAKANG")
 
         val db = AbsensiDatabase.getDatabase(this)
         userDao = db.userDao()
 
-        // Inisialisasi EditText
-        val editUsername = findViewById<EditText>(R.id.editUsername)
-        val editEmail = findViewById<EditText>(R.id.editEmail)
-        val editFirstName = findViewById<EditText>(R.id.editFirstName)
-        val editLastName = findViewById<EditText>(R.id.editLastName)
+        val id = intent.getIntExtra("ID", 0)
 
-        // Ambil data user dari database
-        lifecycleScope.launch(Dispatchers.IO) {
+        val tvUsername = findViewById<TextView>(R.id.tvUsername)
+        val tvEmail = findViewById<TextView>(R.id.tvEmail)
+        val tvFirstname = findViewById<TextView>(R.id.tvFirstname)
+        val tvLastname = findViewById<TextView>(R.id.tvLastname)
+
+        lifecycleScope.launch(Dispatchers.IO){
             val user = userDao.getUserById(id)
-            withContext(Dispatchers.Main) {
-                if (user != null) {
-                    editUsername.setText(user.username)
-                    editEmail.setText(user.email)
-                    editFirstName.setText(user.namaDepan)
-                    editLastName.setText(user.namaBelakang)
-                }
+            withContext(Dispatchers.Main){
+                tvUsername.text = user.username
+                tvEmail.text = user.email
+                tvFirstname.text = user.namadepan
+                tvLastname.text = user.namabelakang
             }
-        }
 
-        // Logout
-        val buttonLogout = findViewById<Button>(R.id.buttonLogout)
-        buttonLogout.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

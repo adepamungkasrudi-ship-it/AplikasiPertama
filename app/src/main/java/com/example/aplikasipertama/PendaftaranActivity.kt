@@ -17,77 +17,77 @@ class PendaftaranActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-
-
         setContentView(R.layout.activity_pendaftaran)
-        // Inisialisasi komponen dari layout
-        val editUsername = findViewById<EditText>(R.id.editUsername)
-        val editEmail = findViewById<EditText>(R.id.editEmail)
-        val editFirstName = findViewById<EditText>(R.id.editFirstName)
-        val editLastName = findViewById<EditText>(R.id.editLastName)
-        val editPassword = findViewById<EditText>(R.id.editPassword)
-        val editConfirmPassword = findViewById<EditText>(R.id.editPassword)
-        val btnSubmit = findViewById<Button>(R.id.btnSubmit)
-        val btnCancel = findViewById<Button>(R.id.btnCancel)
 
-        // Tombol Submit
-        btnSubmit.setOnClickListener {
-            val username = editUsername.text.toString().trim()
-            val email = editEmail.text.toString().trim()
-            val firstName = editFirstName.text.toString().trim()
-            val lastName = editLastName.text.toString().trim()
-            val password = editPassword.text.toString().trim()
-            val confirmPassword = editConfirmPassword.text.toString().trim()
+        val username = findViewById<EditText>(R.id.editTextUsername)
+        val email = findViewById<EditText>(R.id.editTextEmail)
+        val firstname = findViewById<EditText>(R.id.editFirstName)
+        val lastname = findViewById<EditText>(R.id.editLastName)
+        val password = findViewById<EditText>(R.id.editPassword)
+        val passwordlagi = findViewById<EditText>(R.id.editPasswordLagi)
 
-            // Validasi input
-            when {
-                username.isBlank() || email.isBlank() ||
-                        firstName.isBlank() || lastName.isBlank() ||
-                        password.isBlank() || confirmPassword.isBlank() -> {
-                    Toast.makeText(this, "Semua kolom harus diisi!", Toast.LENGTH_SHORT).show()
+        var buttonSubmit = findViewById<Button>(R.id.btnSubmit)
+        buttonSubmit.setOnClickListener {
+            var usernameText = username.text.toString()
+            var emailText = email.text.toString()
+            var firstnameText = firstname.text.toString()
+            var lastnameText = lastname.text.toString()
+            var passwordText = password.text.toString()
+            var passwordlagiText = passwordlagi.text.toString()
+
+
+            if (usernameText.isBlank() || emailText.isBlank() || firstnameText.isBlank() || lastnameText.isBlank() || passwordText.isBlank() || passwordlagiText.isBlank()) {
+                Toast.makeText(
+                    this,
+                    "Semua Filed Input Harus Diisi",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                val fullName = "$firstnameText $lastnameText".trim()
+                val displayName = if (usernameText.isNotBlank()) usernameText else fullName
+
+                //ini harus didalam logika password sama
+                val userEntity = UserEntity(
+                    username = usernameText,
+                    email = emailText,
+                    namadepan = firstnameText,
+                    namabelakang = lastnameText,
+                    password = passwordText
+                )
+
+                val db = AbsensiDatabase.getDatabase(this)
+                lifecycleScope.launch(Dispatchers.IO){
+                    db.userDao().insertUser(userEntity)
                 }
 
-                password != confirmPassword -> {
-                    Toast.makeText(this, "Password tidak cocok!", Toast.LENGTH_SHORT).show()
-                }
+                Toast.makeText(
+                    this,
+                    "User $displayName berhasil didaftarkan",
+                    Toast.LENGTH_LONG
+                ).show()
+
+                //pindah ke halaman dashborad
+//                val intentPindahDashboard = Intent(this, DashboardActivity::class.java)
+//
+//                intentPindahDashboard.putExtra("USERNAME", usernameText)
+//                intentPindahDashboard.putExtra("EMAIL", emailText)
+//                intentPindahDashboard.putExtra("NAMA DEPAN", firstnameText)
+//                intentPindahDashboard.putExtra("NAMA BELAKANG", lastnameText)
+//
+//                startActivity(intentPindahDashboard)
 
 
-                else -> {
-                    val userEntity = UserEntity(
-                        username= username,
-                        email= email,
-                        namaDepan = firstName,
-                        namaBelakang = lastName,
-                        password = password
-                    )
-                    val db = AbsensiDatabase.getDatabase(this)
-                    lifecycleScope.launch (Dispatchers.IO){
-                        db.userDao().insertUser(userEntity)
-                    }
-                    val fullName = "$firstName $lastName"
-                    Toast.makeText(this, "Pendaftaran berhasil: $fullName", Toast.LENGTH_LONG).show()
 
 
-                    //pindah ke halaman dashboard
-                    val intentPindahDashboard = Intent (this, DashboardActivity::class.java)
-                    intentPindahDashboard.putExtra("USERNAME", editUsername.text.toString())
-                    intentPindahDashboard.putExtra("EMAIL",editEmail.text.toString() )
-                    intentPindahDashboard.putExtra("NAMA_DEPAN", editFirstName.text.toString())
-                    intentPindahDashboard.putExtra("NAMA_BELAKANG",editLastName.text.toString())
-                    startActivity(intentPindahDashboard)
-
-                }
             }
         }
 
-
         val buttonCancel = findViewById<Button>(R.id.btnCancel)
-        buttonCancel.setOnClickListener {
+        buttonCancel.setOnClickListener{
             val intentPindahLogin = Intent(this, MainActivity::class.java)
             startActivity(intentPindahLogin)
-            finish()
         }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

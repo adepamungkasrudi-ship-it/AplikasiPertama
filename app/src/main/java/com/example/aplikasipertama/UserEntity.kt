@@ -1,23 +1,22 @@
 package com.example.aplikasipertama
 
-import android.R
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "users")
-data class UserEntity (
+data class UserEntity(
     @PrimaryKey(autoGenerate = true)
-    val id : Int = 0,
+    val id: Int = 0,
 
-    val username: String,
-    val email: String,
+    val username : String,
+    val email : String,
 
-    @ColumnInfo(name = "firstname")
-    val namaDepan: String,
+    @ColumnInfo(name = "Firstname")
+    val namadepan : String,
 
-    @ColumnInfo(name = "lastname")
-    val namaBelakang: String,
+    @ColumnInfo(name = "Lastname")
+    val namabelakang : String,
 
-    val password: String
+    val password : String
 )
