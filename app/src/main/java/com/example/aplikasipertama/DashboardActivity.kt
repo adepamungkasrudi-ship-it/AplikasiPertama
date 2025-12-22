@@ -36,7 +36,7 @@ class DashboardActivity : AppCompatActivity() {
         val tvEmail = findViewById<TextView>(R.id.tvEmail)
         val tvFirstname = findViewById<TextView>(R.id.tvFirstname)
         val tvLastname = findViewById<TextView>(R.id.tvLastname)
-        val tvAddress = findViewById<TextView>(R.id.editAddress)
+        val tvAddress = findViewById<TextView>(R.id.tvAlamat)
 
         lifecycleScope.launch(Dispatchers.IO){
             val user = userDao.getUserById(id)

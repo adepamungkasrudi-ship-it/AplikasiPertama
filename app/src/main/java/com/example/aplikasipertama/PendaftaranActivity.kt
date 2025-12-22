@@ -34,7 +34,7 @@ class PendaftaranActivity : AppCompatActivity() {
             var emailText = email.text.toString()
             var firstnameText = firstname.text.toString()
             var lastnameText = lastname.text.toString()
-            var address = alamat.text.toString()
+            var addressText = alamat.text.toString()
             var passwordText = password.text.toString()
             var passwordlagiText = passwordlagi.text.toString()
 
@@ -55,7 +55,7 @@ class PendaftaranActivity : AppCompatActivity() {
                     email = emailText,
                     namadepan = firstnameText,
                     namabelakang = lastnameText,
-                    alamat = address,
+                    alamat = addressText,
                     password = passwordText
                 )
 
@@ -77,6 +77,7 @@ class PendaftaranActivity : AppCompatActivity() {
 //                intentPindahDashboard.putExtra("EMAIL", emailText)
 //                intentPindahDashboard.putExtra("NAMA DEPAN", firstnameText)
 //                intentPindahDashboard.putExtra("NAMA BELAKANG", lastnameText)
+                //intentPindahDashboard.putExtra("ALAMAT", addressText)
 //
 //                startActivity(intentPindahDashboard)
 
