@@ -1,5 +1,6 @@
 package com.example.aplikasipertama
 
+import android.location.Address
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -19,6 +20,8 @@ data class UserEntity(
     val namabelakang : String,
 
     val password : String,
+
+    @ColumnInfo(name = "Address")
 
     val alamat : String
 

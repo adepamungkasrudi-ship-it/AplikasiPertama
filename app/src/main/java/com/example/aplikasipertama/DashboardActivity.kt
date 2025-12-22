@@ -25,6 +25,7 @@ class DashboardActivity : AppCompatActivity() {
         val email = intent.getStringExtra("EMAIL")
         val nama_depan = intent.getStringExtra("NAMA DEPAN")
         val nama_belakang = intent.getStringExtra("NAMA BELAKANG")
+        val alamat = intent.getStringExtra("ALAMAT")
 
         val db = AbsensiDatabase.getDatabase(this)
         userDao = db.userDao()
