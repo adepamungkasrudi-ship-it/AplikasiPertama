@@ -1,5 +1,6 @@
 package com.example.aplikasipertama
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +15,7 @@ import kotlinx.coroutines.withContext
 class DashboardActivity : AppCompatActivity() {
     private lateinit var userDao: UserDao
     public var id: Int = 0
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,6 +35,7 @@ class DashboardActivity : AppCompatActivity() {
         val tvEmail = findViewById<TextView>(R.id.tvEmail)
         val tvFirstname = findViewById<TextView>(R.id.tvFirstname)
         val tvLastname = findViewById<TextView>(R.id.tvLastname)
+        val tvAddress = findViewById<TextView>(R.id.editAddress)
 
         lifecycleScope.launch(Dispatchers.IO){
             val user = userDao.getUserById(id)
@@ -41,6 +44,7 @@ class DashboardActivity : AppCompatActivity() {
                 tvEmail.text = user.email
                 tvFirstname.text = user.namadepan
                 tvLastname.text = user.namabelakang
+                tvAddress.text = user.alamat
             }
 
         }

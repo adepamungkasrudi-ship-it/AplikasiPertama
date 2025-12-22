@@ -18,5 +18,9 @@ data class UserEntity(
     @ColumnInfo(name = "Lastname")
     val namabelakang : String,
 
-    val password : String
+    val password : String,
+
+    val alamat : String
+
+
 )

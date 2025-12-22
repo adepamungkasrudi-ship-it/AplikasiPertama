@@ -1,6 +1,7 @@
 package com.example.aplikasipertama
 
 import android.content.Intent
+import android.location.Address
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -23,6 +24,7 @@ class PendaftaranActivity : AppCompatActivity() {
         val email = findViewById<EditText>(R.id.editTextEmail)
         val firstname = findViewById<EditText>(R.id.editFirstName)
         val lastname = findViewById<EditText>(R.id.editLastName)
+        val alamat = findViewById<EditText>(R.id.editAddress)
         val password = findViewById<EditText>(R.id.editPassword)
         val passwordlagi = findViewById<EditText>(R.id.editPasswordLagi)
 
@@ -32,6 +34,7 @@ class PendaftaranActivity : AppCompatActivity() {
             var emailText = email.text.toString()
             var firstnameText = firstname.text.toString()
             var lastnameText = lastname.text.toString()
+            var address = alamat.text.toString()
             var passwordText = password.text.toString()
             var passwordlagiText = passwordlagi.text.toString()
 
@@ -52,6 +55,7 @@ class PendaftaranActivity : AppCompatActivity() {
                     email = emailText,
                     namadepan = firstnameText,
                     namabelakang = lastnameText,
+                    alamat = address,
                     password = passwordText
                 )
 
