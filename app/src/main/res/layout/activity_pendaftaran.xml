@@ -97,6 +97,20 @@
         </LinearLayout>
 
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alamat" />
+
+    <EditText
+        android:id="@+id/editAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="input alamat"
+        android:inputType="textAutoCorrect"
+        android:minHeight="48dp" />
+
 
     <TextView
         android:layout_width="wrap_content"
